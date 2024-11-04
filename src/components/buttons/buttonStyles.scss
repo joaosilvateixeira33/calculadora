@@ -1,0 +1,16 @@
+@import '../../css/globalStyles';
+
+.buttons-row{
+    padding: 10px;
+    @include flexbox();
+    gap: 10px;
+
+    button{
+        padding:15px;
+        border-radius: 10px;
+        border: none;
+        font-size: 1rem;
+        font-weight: bold;
+        cursor: pointer;
+    }
+}

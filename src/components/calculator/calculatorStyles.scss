@@ -1,0 +1,16 @@
+@import '../../css/globalStyles';
+
+
+.calculator-container{
+    height: 100vh;
+    @include center();
+    
+    .calculator-content{
+        @include flexbox();
+        flex-direction: column;
+        border: solid $grey-color-1;
+        padding: 50px;
+        font-size: 1.5em;
+        border-radius: 20px;
+    }   
+}
