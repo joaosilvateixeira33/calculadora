@@ -3,6 +3,7 @@ import { ButtonsComponent } from "../buttons";
 import { InputsComponent } from "../Inputs";
 import { ResultComponent } from "../result";
 import './calculatorStyles.css';
+import { ErrosMessage } from "../error";
 
 export const CalculatorComponent = () => {
     let [numerador, setNumerador] = useState('');
@@ -20,7 +21,7 @@ export const CalculatorComponent = () => {
 
         setErro(null);
 
-        if (operacao === '/' && denominadorConvertido === 0) {
+        if (operacao === '/' && denominador === 0) {
             setResultado('Erro: Divisão por zero');
             return;
         }
@@ -35,6 +36,21 @@ export const CalculatorComponent = () => {
                 setDenominador('');
                 res = `${numerador} + ${denominador} = ${numerador + denominador}`;
                 break;
+            case '-':
+                setNumerador('');
+                setDenominador('');
+                res = `${numerador} - ${denominador} = ${numerador - denominador}`;
+                break;
+            case 'X':
+                setNumerador('');
+                setDenominador('');
+                res = `${numerador} X ${denominador} = ${numerador * denominador}`;
+                break;
+            case '/':
+                setNumerador('');
+                setDenominador('');
+                res = `${numerador} / ${denominador} = ${numerador / denominador}`;
+                break;       
         }
 
         setResultado(res);
@@ -63,7 +79,7 @@ export const CalculatorComponent = () => {
                     onDenominadorChange={setDenominador} 
                 />
                 <ButtonsComponent onButtonClick={handleButtonClick} />
-                {erro && <div className="error-message">{erro}</div>}
+                {erro && <ErrosMessage message={erro}/>}
                 <ResultComponent result={resultado} />
             </div>
         </div>

@@ -1,8 +1,7 @@
 import './buttonStyles.css'
 
 const buttonsLabels = [
-    ['C', 'DEL'],
-    ['+', '-', 'x', '/']
+    ['C','+', '-', 'x', '/']
 ];
 
 export const ButtonsComponent = ({onButtonClick}) =>{
