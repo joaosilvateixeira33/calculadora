@@ -6,8 +6,8 @@ import './calculatorStyles.css';
 import { ErrosMessage } from "../error";
 
 export const CalculatorComponent = () => {
-    let [numerador, setNumerador] = useState('');
-    let [denominador, setDenominador] = useState('');
+    const [numerador, setNumerador] = useState('');
+    const [denominador, setDenominador] = useState('');
     const [resultado, setResultado] = useState(null);
     const [operacao, setOperacao] = useState(null);
     const [erro, setErro] = useState(null);
@@ -21,49 +21,46 @@ export const CalculatorComponent = () => {
 
         setErro(null);
 
-        if (operacao === '/' && denominador === 0) {
+        const num = Number(numerador);
+        const den = Number(denominador);
+
+        if (operacao === '/' && den === 0) {
             setResultado('Erro: Divisão por zero');
             return;
         }
 
-        numerador = Number(numerador);
-        denominador = Number(denominador)
-
         let res;
         switch (operacao) {
             case '+':
-                setNumerador('');
-                setDenominador('');
-                res = `${numerador} + ${denominador} = ${numerador + denominador}`;
+                res = `${num} + ${den} = ${num + den}`;
                 break;
             case '-':
-                setNumerador('');
-                setDenominador('');
-                res = `${numerador} - ${denominador} = ${numerador - denominador}`;
+                res = `${num} - ${den} = ${num - den}`;
                 break;
-            case 'X':
-                setNumerador('');
-                setDenominador('');
-                res = `${numerador} X ${denominador} = ${numerador * denominador}`;
+            case 'x':
+                res = `${num} x ${den} = ${num * den}`;
                 break;
             case '/':
-                setNumerador('');
-                setDenominador('');
-                res = `${numerador} / ${denominador} = ${numerador / denominador}`;
-                break;       
+                res = `${num} / ${den} = ${num / den}`;
+                break;
+            default:
+                res = null;
+                break;
         }
 
         setResultado(res);
+        setNumerador('');
+        setDenominador('');
     };
 
     const handleButtonClick = (label) => {
-        if(label == 'C'){
+        if (label === 'C') {
             setNumerador('');
             setDenominador('');
             setResultado(null);
             setOperacao(null);
             setErro(null);
-        }else{
+        } else {
             setOperacao(label);
             handleCalculate();
         }
@@ -79,7 +76,7 @@ export const CalculatorComponent = () => {
                     onDenominadorChange={setDenominador} 
                 />
                 <ButtonsComponent onButtonClick={handleButtonClick} />
-                {erro && <ErrosMessage message={erro}/>}
+                {erro && <ErrosMessage message={erro} />}
                 <ResultComponent result={resultado} />
             </div>
         </div>
